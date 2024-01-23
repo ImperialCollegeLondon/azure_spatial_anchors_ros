@@ -1,11 +1,19 @@
 <launch>
-  <!-- See install instructions here: https://github.com/IntelRealSense/realsense-ros -->
-  <include file="$(find realsense2_camera)/launch/rs_t265.launch" >
-      <arg name="enable_fisheye1" value="true" />
-      <arg name="enable_fisheye2" value="true" />
-  </include>
+  <group ns="sensors">
+    <!-- See install instructions here: https://github.com/IntelRealSense/realsense-ros -->
+    <include file="$(find realsense2_camera)/launch/rs_t265.launch" >
+        <arg name="camera"          value="t265"/>
+        <arg name="enable_fisheye1" value="true" />
+        <arg name="enable_fisheye2" value="true" />
+        <arg name="publish_odom_tf" value="false"/>
+        <arg name="fisheye_fps"     value="30"/>
+        <arg name="gyro_fps"        value="30"/>
+        <arg name="accel_fps"       value="30"/>
+    </include>
 
-  <!-- See install instructions here: https://github.com/ethz-asl/image_undistort -->
-  <include file="$(find image_undistort)/launch/undistort_t265.launch" >
-  </include>
+    <!-- See install instructions here: https://github.com/ethz-asl/image_undistort -->
+    <include file="$(find image_undistort)/launch/undistort_t265.launch" >
+        <arg name="namespace"       value="t265" /> 
+    </include>
+  </group>
 </launch>
